@@ -11,8 +11,7 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "lib": ["esnext", "dom"], // lib para incluir suporte ao navegador DOM
-    "types": ["node", "jest"] // tipos do Node.js
-    
+    "types": ["node", "jest"], // tipos do Node.js
   },
   "jest": {
     "tsConfig": "./tsconfig.json"
