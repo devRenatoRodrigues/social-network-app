@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import mapStatusHTTP from '../utils/mapStatusHTTP.util';
 import JWTUtils from '../utils/JWT.util';
 
-async function validateToken(req: Request, res: Response, next: NextFunction): Promise<unknown> {
+export async function validateToken(req: Request, res: Response, next: NextFunction): Promise<unknown> {
     const { authorization } = req.headers;
 
     if (!authorization) {
@@ -19,6 +19,4 @@ async function validateToken(req: Request, res: Response, next: NextFunction): P
         return res
             .status(mapStatusHTTP('UNAUTHORIZED')).json({ message: 'Token must be a valid token' });
     }
-}
-
-export default validateToken;
+};

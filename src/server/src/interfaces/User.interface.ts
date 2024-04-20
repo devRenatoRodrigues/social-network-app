@@ -31,4 +31,7 @@ export interface IUserProfile extends IUser {
     sentFriendRequests: IUser[];
 };
 
-export type IUserResponse = Omit<IUser, 'password'>;
+export interface IUserStatusResponse {
+    username: string;
+    status: UserStatus;
+};
