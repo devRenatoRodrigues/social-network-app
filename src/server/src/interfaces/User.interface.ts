@@ -34,4 +34,5 @@ export interface IUserProfile extends IUser {
 export interface IUserStatusResponse {
     username: string;
     status: UserStatus;
+    email?: string;
 };

@@ -1,6 +1,7 @@
 import { UserModel } from '../models';
 import { IToken, ILogin, IUser, ServiceResponse, ServiceMessage, IUserStatusResponse } from '../interfaces/';
 import JwtService from '../utils/JWT.util';
+import { log } from 'console';
 
 export class UserService {
     constructor(
@@ -23,4 +24,12 @@ export class UserService {
         if (!updatedUser) return { status: 'NOT_FOUND', data: { message: 'User not found' } };
         return { status: 'SUCCESSFUL', data: updatedUser };
     }
+
+    public async findByStatus(status: IUser['status']): Promise<ServiceResponse<ServiceMessage | IUserStatusResponse[]>> {
+        log('service', status);
+        const users = await this._userModel.findByStatus(status);
+        if (!users) return { status: 'NOT_FOUND', data: { message: 'No users found' } };
+        return { status: 'SUCCESSFUL', data: users };
+    }
+
 }

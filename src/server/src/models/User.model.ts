@@ -18,7 +18,17 @@ export class UserModel {
         if (updatedRows === 0) return null;
         const user = await this.model.findByPk(id);
         if (!user) return null;
-        const { email, username } = user;
-        return { username, status, };
+        const { username } = user;
+        return { username, status };
     }
+
+    async findByStatus(status: IUser['status']): Promise<IUserStatusResponse[] | null> {
+        const users = await this.model.findAll({ where: { status } });
+        if (!users) return null;
+        return users.map(user => {
+            const { email, username, status } = user;
+            return { email, username, status };
+        });
+    }
+
 }
