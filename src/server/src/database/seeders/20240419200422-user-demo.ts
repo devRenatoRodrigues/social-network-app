@@ -13,6 +13,11 @@ export default {
         email: 'uncle_bob@mail.com',
         password: 'secret_user',
       },
+      {
+        username: 'Duck Dodgers',
+        email: 'duck_dogersb@mail.com',
+        password: 'secret_user',
+      },
     ], {});
   },
 

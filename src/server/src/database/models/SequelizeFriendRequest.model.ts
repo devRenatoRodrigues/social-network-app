@@ -5,6 +5,7 @@ import {
 } from 'sequelize';
 import db from '.';
 import SequelizeUser from './SequelizeUser.model';
+import { FriendRequestStatus } from '../../interfaces';
 
 class SequelizeFriendRequest extends Model {
     declare id: CreationOptional<number>;
@@ -29,7 +30,7 @@ SequelizeFriendRequest.init({
         allowNull: false,
     },
     status: {
-        type: DataTypes.STRING,
+        type: DataTypes.ENUM(FriendRequestStatus.ACCEPTED, FriendRequestStatus.PENDING, FriendRequestStatus.REJECTED),
         allowNull: false,
         defaultValue: 'pending',
     },
