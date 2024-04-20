@@ -5,7 +5,8 @@ import {
     Model,
     DataTypes,
 } from 'sequelize';
-import db from '../config/config';
+import db from '.';
+import { UserStatus } from '../../interfaces/User.interface';
 
 class SequelizeUser extends Model<InferAttributes<SequelizeUser>,
     InferCreationAttributes<SequelizeUser>> {
@@ -16,6 +17,8 @@ class SequelizeUser extends Model<InferAttributes<SequelizeUser>,
     declare email: string;
 
     declare password: string;
+
+    declare status: UserStatus;
 }
 SequelizeUser.init({
     id: {
@@ -36,11 +39,17 @@ SequelizeUser.init({
         type: DataTypes.STRING,
         allowNull: false,
     },
-}, {
-    sequelize: db,
-    modelName: 'users',
-    tableName: 'users',
-    timestamps: false,
-});
+    status: {
+        type: DataTypes.ENUM(UserStatus.ONLINE, UserStatus.OFFLINE, UserStatus.BUSY, UserStatus.AWAY),
+        allowNull: false,
+        defaultValue: UserStatus.OFFLINE,
+    },
+},
+    {
+        sequelize: db,
+        modelName: 'users',
+        tableName: 'users',
+        timestamps: false,
+    });
 
 export default SequelizeUser;

@@ -1,5 +1,5 @@
 import { Model, QueryInterface, DataTypes } from 'sequelize';
-import { IUser } from '../../interfaces/User.interface';
+import { IUser, UserStatus } from '../../interfaces/User.interface';
 
 export default {
   up(queryInterface: QueryInterface) {
@@ -22,6 +22,11 @@ export default {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      status: {
+        type: DataTypes.ENUM(UserStatus.ONLINE, UserStatus.OFFLINE, UserStatus.BUSY, UserStatus.AWAY),
+        allowNull: false,
+        defaultValue: UserStatus.OFFLINE,
+      }
     });
   },
 
