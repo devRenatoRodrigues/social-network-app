@@ -1,9 +1,11 @@
 import { IFriendRequestResponse } from '../interfaces';
 import { FriendRequest } from '../models';
+import { FriendShipModel } from '../models/Friendship.model';
 
 export class FriendRequestService {
     constructor(
         private _friendRequestModel = new FriendRequest(),
+        private _friendship = new FriendShipModel()
     ) { }
 
     public async sendFriendRequest(senderId: number, receiverId: number): Promise<IFriendRequestResponse> {
@@ -14,6 +16,7 @@ export class FriendRequestService {
 
     public async acceptFriendRequest(senderId: number, receiverId: number): Promise<IFriendRequestResponse> {
         await this._friendRequestModel.updateStatus(senderId, receiverId, 'accepted');
+        await this._friendship.create({ userId: senderId, friendId: receiverId });
         return { senderId, receiverId, status: 'accepted' };
     }
 
