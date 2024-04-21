@@ -7,7 +7,7 @@ export async function loginRequisition(user: ILogin) {
             email: user.email,
             password: user.password
         });
-        console.log('service', response);
+        localStorage.setItem('token', response.data.token);
         return response.data;
     } catch (error) {
         throw new Error('Failed to log in.');
